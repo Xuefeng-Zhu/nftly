@@ -1,0 +1,17 @@
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+}
+
+.body {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+}
+
+.nav {
+  flex: 0;
+}
