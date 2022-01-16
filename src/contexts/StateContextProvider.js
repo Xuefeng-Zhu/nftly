@@ -7,7 +7,6 @@ import { useWeb3Context } from './Web3ContextProvider';
 import * as covalent from '../utils/covalent';
 import * as opensea from '../utils/opensea';
 
-const NFT_PORT_API = 'https://api.nftport.xyz/v0';
 const StateContext = createContext();
 
 export const StateContextProvider = ({ children }) => {
@@ -27,7 +26,6 @@ export const StateContextProvider = ({ children }) => {
       return;
     }
 
-    console.log(collections[address]);
     setLoading(true);
 
     const { collection } = await opensea.retrieveContract(address);
@@ -41,38 +39,11 @@ export const StateContextProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const uploadFile = async (file) => {
-    const data = new FormData();
-    data.append('file', file);
-
-    const options = {
-      method: 'POST',
-      url: `${NFT_PORT_API}/files`,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: process.env.REACT_APP_NFT_PORT_API_KEY,
-        'content-type':
-          'multipart/form-data; boundary=---011000010111000001101001',
-      },
-      data,
-    };
-
-    return axios.request(options).then(function (response) {
-      return response.data;
-    });
-  };
-
-  const mintNFT = async (data, address) => {
-    data.date = new Date();
-  };
-
   return (
     <StateContext.Provider
       value={{
         retrieveMarket,
         retrieveContract,
-        uploadFile,
-        mintNFT,
         collections,
         loading,
       }}

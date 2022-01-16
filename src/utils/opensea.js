@@ -22,9 +22,7 @@ export const retrieveAssets = async ({
     },
   };
 
-  return axios.request(options).then(function (response) {
-    return response.data;
-  });
+  return axios.request(options).then((res) => res.data);
 };
 
 export const retrieveContract = async (address) => {
@@ -36,7 +34,5 @@ export const retrieveContract = async (address) => {
     },
   };
 
-  return axios.request(options).then(function (response) {
-    return response.data;
-  });
+  return axios.request(options).then((res) => res.data);
 };

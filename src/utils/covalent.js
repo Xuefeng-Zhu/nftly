@@ -12,7 +12,5 @@ export const retrieveMarket = async ({ chainId = 1 } = {}) => {
     params: { key: process.env.REACT_APP_COVALENT_KEY },
   };
 
-  return axios.request(options).then(function (response) {
-    return response.data;
-  });
+  return axios.request(options).then((res) => res.data);
 };
