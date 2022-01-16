@@ -23,6 +23,11 @@ export const StateContextProvider = ({ children }) => {
   };
 
   const retrieveContract = async (address) => {
+    if (collections[address]?.opensea) {
+      return;
+    }
+
+    console.log(collections[address]);
     setLoading(true);
 
     const { collection } = await opensea.retrieveContract(address);

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { SpinLoading, Swiper } from 'antd-mobile';
+import { SpinLoading, Swiper, AutoCenter } from 'antd-mobile';
 import { NFTPreview, NFTFullPage } from '@zoralabs/nft-components';
 
 import { retrieveAssets } from '../utils/opensea';
@@ -11,7 +11,11 @@ const Gallery = ({ isLoading, data }) => {
   }
 
   if (isLoading) {
-    return <SpinLoading />;
+    return (
+      <AutoCenter>
+        <SpinLoading />
+      </AutoCenter>
+    );
   }
 
   return (

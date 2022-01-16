@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { SpinLoading, InfiniteScroll, List, Card, Image } from 'antd-mobile';
+import {
+  SpinLoading,
+  InfiniteScroll,
+  List,
+  Card,
+  Image,
+  Grid,
+  AutoCenter,
+  Button,
+} from 'antd-mobile';
+import { AppstoreOutline, HistogramOutline } from 'antd-mobile-icons';
 
 import { useStateContext } from '../contexts/StateContextProvider';
 import { useWeb3Context } from '../contexts/Web3ContextProvider';
@@ -39,24 +49,44 @@ const Collections = () => {
       <List>
         {data.map((item, index) => (
           <List.Item key={index}>
-            <Card
-              title={item.collection_name}
-              onClick={() => {
-                console.log(item.collection_address);
-                history.push(`/collections/${item.collection_address}`);
-              }}
-            >
+            <Card title={item.collection_name}>
               <Image
                 src={item.opensea?.banner_image_url}
                 height={200}
                 fit="fill"
               />
+              <Grid columns={2} gap={8}>
+                <Grid.Item
+                  onClick={() => {
+                    history.push(`/collections/${item.collection_address}`);
+                  }}
+                >
+                  <AutoCenter>
+                    <Button fill="none">
+                      <AppstoreOutline />
+                      Items
+                    </Button>
+                  </AutoCenter>
+                </Grid.Item>
+                <Grid.Item>
+                  <AutoCenter>
+                    <Button fill="none">
+                      <HistogramOutline />
+                      Stats
+                    </Button>
+                  </AutoCenter>
+                </Grid.Item>
+              </Grid>
             </Card>
           </List.Item>
         ))}
       </List>
       <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
-      {loading && <SpinLoading />}
+      {loading && (
+        <AutoCenter>
+          <SpinLoading />
+        </AutoCenter>
+      )}
     </>
   );
 };
