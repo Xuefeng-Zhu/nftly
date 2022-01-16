@@ -55,6 +55,7 @@ export const nftOwned = async (chain, address) => {
     },
     params: {
       chain,
+      include: 'metadata',
     },
   };
 

@@ -19,7 +19,7 @@ const NFTList = ({ header, isLoading, nfts, onClickItem }) => {
           key={nft.file_url}
           prefix={
             <Image
-              src={nft.file_url}
+              src={nft.cached_file_url}
               style={{ borderRadius: 20 }}
               fit="cover"
               width={40}
