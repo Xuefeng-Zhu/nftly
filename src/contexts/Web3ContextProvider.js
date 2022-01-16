@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -7,7 +7,7 @@ import {
 } from 'react';
 import Web3Modal from 'web3modal';
 
-import { Web3Provider, JsonRpcProvider } from '@ethersproject/providers';
+import { Web3Provider } from '@ethersproject/providers';
 
 const web3Modal = new Web3Modal({
   cacheProvider: true,
@@ -27,6 +27,7 @@ export const Web3Context = createContext({
 export const Web3ContextProvider = ({ children }) => {
   const [provider, setProvider] = useState();
   const [signer, setSigner] = useState();
+  const [network, setNetwork] = useState();
   const [address, setAddress] = useState('');
   const [web3Connection, setWeb3Connection] = useState();
 
@@ -47,6 +48,7 @@ export const Web3ContextProvider = ({ children }) => {
     setWeb3Connection(connection);
     const newProvider = new Web3Provider(connection);
     setProvider(newProvider);
+    setNetwork(await newProvider.getNetwork());
 
     const newSigner = newProvider.getSigner();
     setSigner(newSigner);
@@ -64,11 +66,6 @@ export const Web3ContextProvider = ({ children }) => {
   useEffect(() => {
     if (web3Modal.cachedProvider) {
       loadWeb3Modal();
-    } else {
-      const newProvider = new JsonRpcProvider(
-        'https://stardust.metis.io/?owner=588'
-      );
-      setProvider(newProvider);
     }
   }, []);
 
@@ -78,6 +75,7 @@ export const Web3ContextProvider = ({ children }) => {
         provider,
         signer,
         address,
+        network,
         web3Modal,
         loadWeb3Modal,
         logoutOfWeb3Modal,

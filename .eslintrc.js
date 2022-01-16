@@ -27,5 +27,6 @@ module.exports = {
       { ignores: ['modules'] },
     ],
     'prettier/prettier': ['error', { singleQuote: true }],
+    'react/prop-types': [false],
   },
 };
