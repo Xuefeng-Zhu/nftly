@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {
-  Button,
-  List,
-  Form,
-  Input,
-  TextArea,
-  ImageUploader,
-  Dialog,
-} from 'antd-mobile';
+import { Button, List, Form, Input, TextArea, Dialog } from 'antd-mobile';
 
 import { useWeb3Context } from '../contexts/Web3ContextProvider';
 import { easyMint, uploadFile } from '../utils/nftport';
@@ -17,13 +9,12 @@ const MintToken = () => {
   const history = useHistory();
   const { address } = useWeb3Context();
   const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [file, setFile] = useState();
+  const [symbol, setSymbol] = useState();
   const [loading, setLoading] = useState(false);
 
-  async function handleMint() {
+  async function handleDeploy() {
     setLoading(true);
-    const data = await easyMint(name, description, address, file[0].url);
+    const data = await easyMint(name, symbol, address);
     setLoading(false);
 
     Dialog.confirm({
@@ -46,13 +37,13 @@ const MintToken = () => {
             color="primary"
             size="large"
             loading={loading}
-            onClick={handleMint}
+            onClick={handleDeploy}
           >
             Submit
           </Button>
         }
       >
-        <Form.Header>Mint NFT token</Form.Header>
+        <Form.Header>Deploy NFT Contract</Form.Header>
         <Form.Item
           name="name"
           label="Name"
@@ -60,24 +51,13 @@ const MintToken = () => {
         >
           <Input onChange={setName} />
         </Form.Item>
+
         <Form.Item
-          name="description"
-          label="Description"
-          rules={[{ required: true, message: 'Description is required' }]}
+          name="symbol"
+          label="Symbol"
+          rules={[{ required: true, message: 'Symbol is required' }]}
         >
-          <TextArea rows={3} onChange={setDescription} />
-        </Form.Item>
-        <Form.Item
-          name="file"
-          label="File"
-          rules={[{ required: true, message: 'File is required' }]}
-        >
-          <ImageUploader
-            value={file}
-            onChange={setFile}
-            upload={uploadFile}
-            maxCount={1}
-          />
+          <Input onChange={setSymbol} />
         </Form.Item>
       </Form>
     </>

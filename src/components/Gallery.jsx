@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { SpinLoading, Swiper, AutoCenter } from 'antd-mobile';
+import { SpinLoading, Swiper, AutoCenter, FloatingBubble } from 'antd-mobile';
+import { HeartOutline } from 'antd-mobile-icons';
 import { NFTFullPage } from '@zoralabs/nft-components';
 
 const Gallery = ({ isLoading, data }) => {
@@ -28,6 +29,15 @@ const Gallery = ({ isLoading, data }) => {
           </Swiper.Item>
         ))}
       </Swiper>
+      <FloatingBubble
+        style={{
+          '--initial-position-bottom': '50px',
+          '--initial-position-right': '24px',
+          // '--edge-distance': '24px',
+        }}
+      >
+        <HeartOutline fontSize={32} />
+      </FloatingBubble>
     </>
   );
 };

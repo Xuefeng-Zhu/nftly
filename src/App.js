@@ -48,7 +48,6 @@ const App = () => {
         <div className="nav">
           <Navbar />
         </div>
-
         <div className="body">
           <Switch>
             <Route exact path="/home" component={Home} />
