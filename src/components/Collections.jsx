@@ -9,8 +9,10 @@ import {
   Grid,
   AutoCenter,
   Button,
+  Popup,
 } from 'antd-mobile';
 import { AppstoreOutline, HistogramOutline } from 'antd-mobile-icons';
+import NumberFormat from 'react-number-format';
 
 import { useStateContext } from '../contexts/StateContextProvider';
 import { useWeb3Context } from '../contexts/Web3ContextProvider';
@@ -22,6 +24,7 @@ const Collections = () => {
     useStateContext();
   const [data, setData] = useState([]);
   const [hasMore, setHasMore] = useState(true);
+  const [selectedCollection, setSelectedCollection] = useState();
 
   useEffect(async () => {
     await retrieveMarket({
@@ -68,7 +71,11 @@ const Collections = () => {
                     </Button>
                   </AutoCenter>
                 </Grid.Item>
-                <Grid.Item>
+                <Grid.Item
+                  onClick={() => {
+                    setSelectedCollection(item);
+                  }}
+                >
                   <AutoCenter>
                     <Button fill="none">
                       <HistogramOutline />
@@ -87,6 +94,86 @@ const Collections = () => {
           <SpinLoading />
         </AutoCenter>
       )}
+      <Popup
+        visible={!!selectedCollection}
+        onMaskClick={() => {
+          setSelectedCollection(null);
+        }}
+        bodyStyle={{ height: '70vh' }}
+      >
+        <List header={`${selectedCollection?.collection_name} Stats`}>
+          <List.Item
+            description={
+              <NumberFormat
+                value={selectedCollection?.market_cap_quote}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'$'}
+              />
+            }
+          >
+            Market Cap
+          </List.Item>
+          <List.Item
+            description={
+              <NumberFormat
+                value={selectedCollection?.volume_quote_24h}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'$'}
+              />
+            }
+          >
+            24h Volume
+          </List.Item>
+          <List.Item
+            description={
+              <NumberFormat
+                value={selectedCollection?.max_price_quote}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'$'}
+              />
+            }
+          >
+            Max Price
+          </List.Item>
+          <List.Item
+            description={
+              <NumberFormat
+                value={selectedCollection?.floor_price_quote_7d}
+                displayType={'text'}
+                thousandSeparator={true}
+                prefix={'$'}
+              />
+            }
+          >
+            Floor Price in 7 days
+          </List.Item>
+          <List.Item
+            description={
+              <NumberFormat
+                value={selectedCollection?.unique_token_ids_sold_count_alltime}
+                displayType={'text'}
+                thousandSeparator={true}
+              />
+            }
+          >
+            Items
+          </List.Item>
+          <List.Item
+            description={
+              <NumberFormat
+                value={selectedCollection?.unique_wallet_purchase_count_alltime}
+                displayType={'text'}
+                thousandSeparator={true}
+              />
+            }
+          >
+            Owners
+          </List.Item>
+        </List>
+      </Popup>
     </>
   );
 };
