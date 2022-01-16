@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { useWeb3Context } from './Web3ContextProvider';
 import * as covalent from '../utils/covalent';
 import * as opensea from '../utils/opensea';
+import * as nftport from '../utils/nftport';
 
 const StateContext = createContext();
 
@@ -13,6 +14,7 @@ export const StateContextProvider = ({ children }) => {
   const { provider, signer } = useWeb3Context();
   const [loading, setLoading] = useState(false);
   const [collections, setCollections] = useMap({});
+  const [nfts, setNfts] = useMap({});
 
   const retrieveMarket = async (opts) => {
     setLoading(true);

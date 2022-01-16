@@ -7,11 +7,11 @@ import {
 } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
-import Home from './components/Home';
 import Connect from './components/Connect';
-import Collections from './components/Collections';
-import CollectionAssets from './components/CollectionAssets';
+import Home from './components/Home';
+import Discovery from './components/Discovery';
 import Profile from './components/Profile';
+import CollectionAssets from './components/CollectionAssets';
 import MintToken from './components/MintToken';
 import OwnedNFT from './components/OwnedNFT';
 import NFTDetail from './components/NFTDetail';
@@ -52,7 +52,7 @@ const App = () => {
           <Switch>
             <Route exact path="/home" component={Home} />
             <Route exact path="/connect" component={Connect} />
-            <Route exact path="/discovery" component={Collections} />
+            <Route exact path="/discovery" component={Discovery} />
             <Route
               exact
               path="/collections/:address"

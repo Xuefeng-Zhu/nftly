@@ -4,10 +4,6 @@ import { MessageFill } from 'antd-mobile-icons';
 import { NFTPreview, NFTFullPage } from '@zoralabs/nft-components';
 
 const NFTList = ({ header, isLoading, nfts, onClickItem }) => {
-  function handleIndexChange() {
-    document.getElementsByClassName('body')[0].scrollTop = 0;
-  }
-
   if (isLoading) {
     return (
       <AutoCenter>
