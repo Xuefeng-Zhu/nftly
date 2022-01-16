@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
@@ -10,6 +10,7 @@ import Home from './components/Home';
 import Collections from './components/Collections';
 import CollectionAssets from './components/CollectionAssets';
 import Profile from './components/Profile';
+import QuickMint from './components/QuickMint';
 import Navbar from './components/Navbar';
 import './app.css';
 
@@ -24,13 +25,14 @@ const App = () => {
         <div className="body">
           <Switch>
             <Route exact path="/home" component={Home} />
-            <Route exact path="/collections" component={Collections} />
+            <Route exact path="/discovery" component={Collections} />
             <Route
               exact
               path="/collections/:address"
               component={CollectionAssets}
             />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/mint" component={QuickMint} />
             <Redirect to="/home" />
           </Switch>
         </div>

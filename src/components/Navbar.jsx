@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { TabBar } from 'antd-mobile';
-import { AppOutline, UserOutline, PicturesOutline } from 'antd-mobile-icons';
+import { AppOutline, UserOutline, CompassOutline } from 'antd-mobile-icons';
 
 const tabs = [
   {
@@ -10,9 +10,9 @@ const tabs = [
     icon: <AppOutline />,
   },
   {
-    key: '/collections',
-    title: 'ollections',
-    icon: <PicturesOutline />,
+    key: '/discovery',
+    title: 'Discovery',
+    icon: <CompassOutline />,
   },
   {
     key: '/profile',
